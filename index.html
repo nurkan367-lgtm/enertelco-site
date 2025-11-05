@@ -416,14 +416,54 @@ document.querySelectorAll('.faq .q').forEach(q => {
 </section><section class="band" data-aos="fade-in" id="harita">
 </section><section class="band" id="ip" style="background:#001f3f;padding:70px 20px">
 <div class="container center">
-<h2>IP Sorgulama</h2>
-<p class="muted">IP adresinizi ve servis sağlayıcınızı otomatik öğrenin.</p>
-<div class="card" style="max-width:420px;margin:20px auto">
-<label>IP Adresiniz</label>
-<div id="ipAddr" style="font-size:22px;margin:6px 0;font-weight:700">Yükleniyor...</div>
-<label>Servis Sağlayıcı</label>
-<div id="ipOrg" style="margin:6px 0 10px;font-weight:500;color:#cfe4ec">Yükleniyor...</div>
-<button class="btn" onclick="copyIP()">Kopyala</button>
+<!-- IP SORGULAMA -->
+<section id="ip-sorgulama" style="padding:80px 0;text-align:center;background:#042b3a;">
+  <div class="container" style="max-width:600px;margin:auto;background:#083b52;border-radius:16px;padding:32px;box-shadow:0 0 25px rgba(0,0,0,0.2);">
+    <h2 style="color:#fff;font-weight:700;margin-bottom:8px;">IP Sorgulama</h2>
+    <p style="color:#bfe6f0;margin-bottom:24px;">IP adresinizi ve servis sağlayıcınızı otomatik öğrenin.</p>
+
+    <div style="background:#0b4c63;padding:24px;border-radius:12px;">
+      <p style="color:#bfe6f0;font-size:16px;">IP Adresiniz</p>
+      <h2 id="ip" style="color:#3ce0cf;margin:8px 0;font-size:28px;">Yükleniyor...</h2>
+      <p style="color:#bfe6f0;font-size:16px;">Servis Sağlayıcı</p>
+      <h3 id="isp" style="color:#fff;margin:8px 0 16px;">Yükleniyor...</h3>
+      <button onclick="copyIP()" style="padding:10px 28px;border:none;background:#3ce0cf;color:#083b52;font-weight:700;border-radius:20px;cursor:pointer;box-shadow:0 0 15px rgba(60,224,207,0.4);transition:all .3s;">
+        Kopyala
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+// IP ve servis sağlayıcıyı çek
+async function getIPInfo() {
+  try {
+    // ipapi.co'dan bilgi alıyoruz
+    const response = await fetch("https://ipapi.co/json/");
+    const data = await response.json();
+
+    const ipElem = document.getElementById("ip");
+    const ispElem = document.getElementById("isp");
+
+    if (ipElem) ipElem.textContent = data.ip || "Bilinmiyor";
+    if (ispElem) ispElem.textContent = data.org || "Bilinmiyor";
+
+  } catch (error) {
+    console.error("IP bilgisi alınamadı:", error);
+  }
+}
+
+// Sayfa yüklenince çalıştır
+document.addEventListener("DOMContentLoaded", getIPInfo);
+
+// Kopyalama fonksiyonu
+function copyIP() {
+  const ipText = document.getElementById("ip").textContent;
+  navigator.clipboard.writeText(ipText);
+  alert("IP adresi kopyalandı: " + ipText);
+}
+</script>
+
 </div>
 <div class="grid" style="display:flex;flex-wrap:wrap;justify-content:center;gap:20px;margin-top:40px">
 <div class="card"><h3>IP Nedir?</h3><p>IP adresi, cihazların internete bağlanırken kimliklerini gösteren sayısal tanımlayıcıdır.</p></div>
