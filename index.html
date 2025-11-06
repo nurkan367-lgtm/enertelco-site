@@ -205,45 +205,17 @@ nav a:hover {
 /* ensure nav active style and top button */
 a.active{color:#00e1c6}
 
-/* FAB unified */
-.fab{position:fixed; right:1.25rem; bottom:1.25rem; z-index:9999; display:flex; flex-direction:column; align-items:flex-end; gap:.5rem}
-.fab-main{border:0; border-radius:999px; padding:.875rem 1.125rem; font-weight:700; box-shadow:0 6px 22px rgba(0,0,0,.35); cursor:pointer}
-.fab-menu{position:absolute; right:0; bottom:3.5rem; display:flex; flex-direction:column; gap:.5rem; transform:translateY(8px); opacity:0; visibility:hidden; pointer-events:none}
-.fab[aria-expanded="true"] .fab-menu{transform:translateY(0); opacity:1; visibility:visible; pointer-events:auto}
-.fab-menu a{display:block; text-decoration:none; padding:.75rem 1rem; border-radius:999px; box-shadow:0 6px 22px rgba(0,0,0,.35)}
-@media (prefers-reduced-motion: no-preference){
-  .fab-menu{transition:opacity .2s, transform .2s, visibility .2s}
-}
-@media (max-width: 480px){
-  .fab{right:.75rem; bottom:.75rem}
-  .fab-menu a{max-width:70vw; text-align:center}
-}
-
-/* FAB v2 - placed above scroll-to-top */
-.fab{bottom:5.5rem} /* leave room for existing up-arrow */
-.fab-main{min-width:140px; background:#2de0c1; color:#0b2a33}
-.fab-menu a{background:#2de0c1; color:#0b2a33; text-align:center; font-weight:700; min-width:180px}
-.fab-menu a:hover{filter:brightness(1.05)}
-
-/* Static CTA Stack (no toggle) */
-#cta-stack{position:fixed; right:1.25rem; bottom:5.5rem; z-index:9999; display:flex; flex-direction:column; gap:.75rem; align-items:flex-end}
-#cta-stack .cta-btn{display:block; text-decoration:none; font-weight:700; padding:.9rem 1.2rem; border-radius:999px; box-shadow:0 6px 22px rgba(0,0,0,.35)}
+/* CTA Stack (desktop) */
+#cta-stack{position:fixed; right:14px; bottom:20px; z-index:9999; display:flex; flex-direction:column; gap:.75rem; align-items:flex-end}
+#cta-stack .cta-btn{display:block; text-decoration:none; font-weight:700; padding:.9rem 1.2rem; border-radius:999px; box-shadow:0 6px 22px rgba(0,0,0,.35); min-width:220px; text-align:center}
+/* Back to top baseline (if exists later) */
+#backTop{ position: fixed; right: 14px; top: 58%; width: 44px; height: 44px; border-radius: 50%; border:none; box-shadow:0 8px 24px rgba(0,0,0,.35); display:none; z-index: 9998; }
+/* Mobile tuning */
 @media (max-width:480px){
-  #cta-stack{right:.75rem; bottom:5.5rem}
-  #cta-stack .cta-btn{max-width:72vw; text-align:center}
+  #cta-stack{ right: calc(12px + env(safe-area-inset-right)); bottom: calc(14px + env(safe-area-inset-bottom)); gap: .6rem; }
+  #cta-stack .cta-btn{ min-width: 76vw; padding:14px 18px; font-size:16px; line-height:1.2; }
+  #backTop{ top: 62%; right: calc(10px + env(safe-area-inset-right)); width:44px; height:44px; line-height:44px; }
 }
-
-/* CTA alignment fix & avoid overlap with scroll-to-top */
-#cta-stack{right:1.25rem; bottom:8.5rem} /* move higher to clear ↑ button */
-#cta-stack .cta-btn{min-width:200px; text-align:center; display:inline-block}
-@media (max-width:480px){
-  #cta-stack{right:.75rem; bottom:9rem}
-  #cta-stack .cta-btn{min-width:64vw}
-}
-
-/* Final alignment for CTA stack */
-#cta-stack{right:14px; bottom:20px} /* snug to bottom-right corner */
-#cta-stack .cta-btn{min-width:220px}
 </style>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/><style>
 #scrollBar {
@@ -295,8 +267,7 @@ nav ul { list-style:none; margin:0; padding:0; display:flex; gap:14px; align-ite
 </style><style id="backTopStyles">
 /* Back to top button */
 #backTop{
-  position: fixed; right: 14px; top: 58%;
-  bottom: auto; /* above FABs */
+  position: fixed; right: 14px; bottom: 110px; /* above FABs */
   width: 42px; height: 42px; border-radius: 50%;
   border:none; background:#0e4052; color:#e8feff;
   box-shadow: 0 8px 24px rgba(0,0,0,.35);
@@ -305,7 +276,7 @@ nav ul { list-style:none; margin:0; padding:0; display:flex; gap:14px; align-ite
 }
 #backTop:hover{ opacity: 1; }
 @media (max-width:768px){
-  #backTop{ top: 58%; bottom: auto; right: 12px; width: 38px; height: 38px; line-height: 38px; font-size:16px; }
+  #backTop{ bottom: 106px; right: 12px; width: 38px; height: 38px; line-height: 38px; font-size:16px; }
 }
 </style></head>
 <body class="kurumsal-mode"><div id="scrollBar"></div>
@@ -613,6 +584,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <!-- Sağ Orta Neon Menü (Test için her zaman görünür) -->
+
 <!-- Teklif Al Modal -->
 <div class="modal" id="teklifModal">
 <div class="modal-content">
@@ -869,7 +841,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 })();
 </script>
-<button aria-label="Yukarı dön" id="backTop">↑</button>
+<button aria-label="Yukarı dön" id="backTop" style="position:fixed;right:22px;bottom:96px;display:none;border:none;border-radius:50%;width:46px;height:46px;background:#00e1c6;box-shadow:0 6px 24px rgba(0,0,0,.25);font-size:22px;cursor:pointer;z-index:999">↑</button>
 <script>
 // Back to top + active nav highlight + FAQ deep link + micro analytics + altyapi legend + form toast
 (function(){
@@ -1067,7 +1039,7 @@ function copyIP(){
   const t = document.getElementById("ip").textContent || "";
   navigator.clipboard.writeText(t).then(()=>alert("IP kopyalandı: " + t));
 }
-</script><script id="responsiveJS">
+</script><div class="cta-stack" id="cta-stack"><a class="cta-btn" href="#teklif" onclick="openTeklif &amp;&amp; openTeklif(); return false;">Teklif Al</a><a class="cta-btn" href="#gorusme" onclick="openMeeting &amp;&amp; openMeeting(); return false;">Görüşme Planla</a></div><script id="responsiveJS">
 (function(){
   function ready(fn){ if(document.readyState!=='loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
   ready(function(){
@@ -1106,5 +1078,5 @@ function copyIP(){
   btn.addEventListener('click', function(){
     window.scrollTo({top:0, behavior:'smooth'});
   });
-})();</script><div class="cta-stack" id="cta-stack"><a class="cta-btn" href="#teklif" onclick="openTeklif &amp;&amp; openTeklif(); return false;">Teklif Al</a><a class="cta-btn" href="#gorusme" onclick="openMeeting &amp;&amp; openMeeting(); return false;">Görüşme Planla</a></div></body>
+})();</script></body>
 </html>
