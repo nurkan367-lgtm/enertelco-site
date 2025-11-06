@@ -205,7 +205,7 @@ nav a:hover {
 /* ensure nav active style and top button */
 a.active{color:#00e1c6}
 
-/* CTA Stack - single source of truth */
+/* CTA Stack - single block bottom-right */
 #cta-stack{position:fixed; right:14px; bottom:20px; z-index:9999; display:flex; flex-direction:column; gap:.75rem; align-items:flex-end}
 #cta-stack .cta-btn{display:block; text-decoration:none; font-weight:700; padding:.9rem 1.2rem; border-radius:999px; box-shadow:0 6px 22px rgba(0,0,0,.35); min-width:220px; text-align:center}
 @media (max-width:480px){ #cta-stack{ right:12px; bottom:18px } #cta-stack .cta-btn{ min-width:76vw; padding:14px 18px; font-size:16px } }
@@ -424,7 +424,7 @@ document.querySelectorAll('.faq .q').forEach(q => {
 </div>
 <div class="card center" data-aos="fade-up">
 <span class="tag">Kurumsal</span><h3>Fiber 1000</h3><div class="price">Sorunuz</div><p class="muted">1 Gbps • SLA • Statik IP</p>
-
+<button class="btn" onclick="choose('Fiber 1000')">Teklif Al</button>
 </div>
 </div>
 </div>
@@ -471,7 +471,7 @@ document.querySelectorAll('.faq .q').forEach(q => {
 <h3>Hemen dönüş yapalım — bilgilerinizi bırakın.</h3>
 <a class="btn" href="#form">Formu Aç</a>
 </div>
-<form class="card" data-aos="fade-up" id="form" onsubmit="return sendContact(this)" style="margin-top:16px">
+<form action="https://formsubmit.co/mnkirik@enertelco.com.tr" class="card" data-aos="fade-up" id="form" method="POST" style="margin-top:16px">
 <label>Ad Soyad</label>
 <input class="input" name="ad" placeholder="Adınız Soyadınız" required=""/>
 <label style="margin-top:10px">Telefon</label>
@@ -480,9 +480,9 @@ document.querySelectorAll('.faq .q').forEach(q => {
 <input class="input" name="adres" placeholder="İl / İlçe / Mahalle"/>
 <label style="margin-top:10px">Mesaj</label>
 <textarea class="input" name="mesaj" placeholder="Kısaca yazın" rows="4"></textarea>
-<button class="btn" style="margin-top:12px">Gönder</button>
+<button class="btn" style="margin-top:12px" type="submit">Gönder</button>
 <div class="result" id="contactMsg"></div>
-</form>
+<input name="_captcha" type="hidden" value="false"/><input name="_template" type="hidden" value="box"/><input name="_subject" type="hidden" value="İletişim Formu - Web Başvuru"/><input name="_next" type="hidden" value="https://enertelco.com.tr/tesekkurler.html"/></form>
 </div>
 </section><section class="band" data-aos="fade-in" id="harita">
 </section><section class="band" id="ip" style="background:#001f3f;padding:70px 20px">
@@ -584,7 +584,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span class="close" onclick="closeTeklif()">×</span>
 <h2>Kurumsal Teklif Al</h2>
 <p class="muted">İhtiyacınızı paylaşın, size özel teklif hazırlayalım.</p>
-<form id="teklifForm" onsubmit="return sendTeklif(this)">
+<form action="https://formsubmit.co/mnkirik@enertelco.com.tr" id="teklifForm" method="POST">
 <label>Ad Soyad</label>
 <input class="input" name="ad" placeholder="Adınız Soyadınız" required=""/>
 <label style="margin-top:8px">E-posta</label>
@@ -593,9 +593,9 @@ document.addEventListener("DOMContentLoaded", function () {
 <input class="input" name="tel" placeholder="05xx xxx xx xx" required=""/>
 <label style="margin-top:8px">Mesaj</label>
 <textarea class="input" name="mesaj" placeholder="İhtiyacınızı belirtin..." required="" rows="3"></textarea>
-<button class="btn" style="margin-top:12px">Gönder</button>
+<button class="btn" style="margin-top:12px" type="submit">Gönder</button>
 <div class="result" id="teklifMsg"></div>
-</form>
+<input name="_captcha" type="hidden" value="false"/><input name="_template" type="hidden" value="box"/><input name="_subject" type="hidden" value="Kurumsal Teklif - Web Başvuru"/><input name="_next" type="hidden" value="https://enertelco.com.tr/tesekkurler.html"/></form>
 </div>
 </div>
 <!-- Görüşme Planla Modal -->
@@ -604,7 +604,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span class="close" onclick="closeMeeting()">×</span>
 <h2>Görüşme Planla</h2>
 <p class="muted">Tarih ve saatinizi seçin, biz sizi arayalım.</p>
-<form id="meetingForm" onsubmit="return sendMeeting(this)">
+<form action="https://formsubmit.co/mnkirik@enertelco.com.tr" id="meetingForm" method="POST">
 <label>Ad Soyad</label>
 <input class="input" name="ad" placeholder="Adınız Soyadınız" required=""/>
 <label style="margin-top:8px">Telefon</label>
@@ -618,9 +618,9 @@ document.addEventListener("DOMContentLoaded", function () {
 <option>12:00</option><option>13:00</option><option>14:00</option>
 <option>15:00</option><option>16:00</option>
 </select>
-<button class="btn" style="margin-top:12px">Gönder</button>
+<button class="btn" style="margin-top:12px" type="submit">Gönder</button>
 <div class="result" id="meetMsg"></div>
-</form>
+<input name="_captcha" type="hidden" value="false"/><input name="_template" type="hidden" value="box"/><input name="_subject" type="hidden" value="Görüşme Planla - Web Başvuru"/><input name="_next" type="hidden" value="https://enertelco.com.tr/tesekkurler.html"/></form>
 </div>
 </div>
 <style>
@@ -688,11 +688,11 @@ function sendTeklif(form){
     mesaj: form.mesaj.value.trim()
   };
   if(!data.ad || !data.mail || !data.tel || !data.mesaj){
-    document.getElementById('teklifMsg').innerHTML="<span class='bad'>Lütfen tüm alanları doldurun.</span>";
+    /*disabled*/document.getElementById('teklifMsg').innerHTML="<span class='bad'>Lütfen tüm alanları doldurun.</span>";
     return false;
   }
   localStorage.setItem('kurumsal_teklif', JSON.stringify({...data, ts:new Date().toISOString()}));
-  document.getElementById('teklifMsg').innerHTML="<span class='ok'>Talebiniz alındı! En kısa sürede sizinle iletişime geçilecektir.</span>";
+  /*disabled*/document.getElementById('teklifMsg').innerHTML="<span class='ok'>Talebiniz alındı! En kısa sürede sizinle iletişime geçilecektir.</span>";
   setTimeout(closeTeklif, 2000);
   form.reset();
   return false;
@@ -712,11 +712,11 @@ function sendMeeting(form){
     saat: form.saat.value
   };
   if(!data.ad || !data.tel || !data.tarih || !data.saat){
-    document.getElementById('meetMsg').innerHTML="<span class='bad'>Lütfen tüm alanları doldurun.</span>";
+    /*disabled*/document.getElementById('meetMsg').innerHTML="<span class='bad'>Lütfen tüm alanları doldurun.</span>";
     return false;
   }
   localStorage.setItem('meeting_request', JSON.stringify({...data, ts:new Date().toISOString()}));
-  document.getElementById('meetMsg').innerHTML="<span class='ok'>Randevunuz alındı! Ekibimiz sizinle iletişime geçecek.</span>";
+  /*disabled*/document.getElementById('meetMsg').innerHTML="<span class='ok'>Randevunuz alındı! Ekibimiz sizinle iletişime geçecek.</span>";
   setTimeout(closeMeeting, 2000);
   form.reset();
   return false;
@@ -1071,5 +1071,5 @@ function copyIP(){
   btn.addEventListener('click', function(){
     window.scrollTo({top:0, behavior:'smooth'});
   });
-})();</script><div class="cta-stack" id="cta-stack"><a class="cta-btn" href="#teklif" onclick="openTeklif &amp;&amp; openTeklif(); return false;">Teklif Al</a><a class="cta-btn" href="#gorusme" onclick="openMeeting &amp;&amp; openMeeting(); return false;">Görüşme Planla</a></div></body>
+})();</script><div class="cta-stack" id="cta-stack"><a class="cta-btn" href="#teklif">Teklif Al</a><a class="cta-btn" href="#gorusme">Görüşme Planla</a></div></body>
 </html>
