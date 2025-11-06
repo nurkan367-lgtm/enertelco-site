@@ -205,17 +205,10 @@ nav a:hover {
 /* ensure nav active style and top button */
 a.active{color:#00e1c6}
 
-/* CTA Stack (desktop) */
+/* CTA Stack - single source of truth */
 #cta-stack{position:fixed; right:14px; bottom:20px; z-index:9999; display:flex; flex-direction:column; gap:.75rem; align-items:flex-end}
 #cta-stack .cta-btn{display:block; text-decoration:none; font-weight:700; padding:.9rem 1.2rem; border-radius:999px; box-shadow:0 6px 22px rgba(0,0,0,.35); min-width:220px; text-align:center}
-/* Back to top baseline (if exists later) */
-#backTop{ position: fixed; right: 14px; top: 58%; width: 44px; height: 44px; border-radius: 50%; border:none; box-shadow:0 8px 24px rgba(0,0,0,.35); display:none; z-index: 9998; }
-/* Mobile tuning */
-@media (max-width:480px){
-  #cta-stack{ right: calc(12px + env(safe-area-inset-right)); bottom: calc(14px + env(safe-area-inset-bottom)); gap: .6rem; }
-  #cta-stack .cta-btn{ min-width: 76vw; padding:14px 18px; font-size:16px; line-height:1.2; }
-  #backTop{ top: 62%; right: calc(10px + env(safe-area-inset-right)); width:44px; height:44px; line-height:44px; }
-}
+@media (max-width:480px){ #cta-stack{ right:12px; bottom:18px } #cta-stack .cta-btn{ min-width:76vw; padding:14px 18px; font-size:16px } }
 </style>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/><style>
 #scrollBar {
@@ -431,7 +424,7 @@ document.querySelectorAll('.faq .q').forEach(q => {
 </div>
 <div class="card center" data-aos="fade-up">
 <span class="tag">Kurumsal</span><h3>Fiber 1000</h3><div class="price">Sorunuz</div><p class="muted">1 Gbps • SLA • Statik IP</p>
-<button class="btn" onclick="choose('Fiber 1000')">Teklif Al</button>
+
 </div>
 </div>
 </div>
@@ -1039,7 +1032,7 @@ function copyIP(){
   const t = document.getElementById("ip").textContent || "";
   navigator.clipboard.writeText(t).then(()=>alert("IP kopyalandı: " + t));
 }
-</script><div class="cta-stack" id="cta-stack"><a class="cta-btn" href="#teklif" onclick="openTeklif &amp;&amp; openTeklif(); return false;">Teklif Al</a><a class="cta-btn" href="#gorusme" onclick="openMeeting &amp;&amp; openMeeting(); return false;">Görüşme Planla</a></div><script id="responsiveJS">
+</script><script id="responsiveJS">
 (function(){
   function ready(fn){ if(document.readyState!=='loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
   ready(function(){
@@ -1078,5 +1071,5 @@ function copyIP(){
   btn.addEventListener('click', function(){
     window.scrollTo({top:0, behavior:'smooth'});
   });
-})();</script></body>
+})();</script><div class="cta-stack" id="cta-stack"><a class="cta-btn" href="#teklif" onclick="openTeklif &amp;&amp; openTeklif(); return false;">Teklif Al</a><a class="cta-btn" href="#gorusme" onclick="openMeeting &amp;&amp; openMeeting(); return false;">Görüşme Planla</a></div></body>
 </html>
