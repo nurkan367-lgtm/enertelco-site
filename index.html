@@ -204,6 +204,46 @@ nav a:hover {
 
 /* ensure nav active style and top button */
 a.active{color:#00e1c6}
+
+/* FAB unified */
+.fab{position:fixed; right:1.25rem; bottom:1.25rem; z-index:9999; display:flex; flex-direction:column; align-items:flex-end; gap:.5rem}
+.fab-main{border:0; border-radius:999px; padding:.875rem 1.125rem; font-weight:700; box-shadow:0 6px 22px rgba(0,0,0,.35); cursor:pointer}
+.fab-menu{position:absolute; right:0; bottom:3.5rem; display:flex; flex-direction:column; gap:.5rem; transform:translateY(8px); opacity:0; visibility:hidden; pointer-events:none}
+.fab[aria-expanded="true"] .fab-menu{transform:translateY(0); opacity:1; visibility:visible; pointer-events:auto}
+.fab-menu a{display:block; text-decoration:none; padding:.75rem 1rem; border-radius:999px; box-shadow:0 6px 22px rgba(0,0,0,.35)}
+@media (prefers-reduced-motion: no-preference){
+  .fab-menu{transition:opacity .2s, transform .2s, visibility .2s}
+}
+@media (max-width: 480px){
+  .fab{right:.75rem; bottom:.75rem}
+  .fab-menu a{max-width:70vw; text-align:center}
+}
+
+/* FAB v2 - placed above scroll-to-top */
+.fab{bottom:5.5rem} /* leave room for existing up-arrow */
+.fab-main{min-width:140px; background:#2de0c1; color:#0b2a33}
+.fab-menu a{background:#2de0c1; color:#0b2a33; text-align:center; font-weight:700; min-width:180px}
+.fab-menu a:hover{filter:brightness(1.05)}
+
+/* Static CTA Stack (no toggle) */
+#cta-stack{position:fixed; right:1.25rem; bottom:5.5rem; z-index:9999; display:flex; flex-direction:column; gap:.75rem; align-items:flex-end}
+#cta-stack .cta-btn{display:block; text-decoration:none; font-weight:700; padding:.9rem 1.2rem; border-radius:999px; box-shadow:0 6px 22px rgba(0,0,0,.35)}
+@media (max-width:480px){
+  #cta-stack{right:.75rem; bottom:5.5rem}
+  #cta-stack .cta-btn{max-width:72vw; text-align:center}
+}
+
+/* CTA alignment fix & avoid overlap with scroll-to-top */
+#cta-stack{right:1.25rem; bottom:8.5rem} /* move higher to clear ↑ button */
+#cta-stack .cta-btn{min-width:200px; text-align:center; display:inline-block}
+@media (max-width:480px){
+  #cta-stack{right:.75rem; bottom:9rem}
+  #cta-stack .cta-btn{min-width:64vw}
+}
+
+/* Final alignment for CTA stack */
+#cta-stack{right:14px; bottom:20px} /* snug to bottom-right corner */
+#cta-stack .cta-btn{min-width:220px}
 </style>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/><style>
 #scrollBar {
@@ -217,7 +257,57 @@ a.active{color:#00e1c6}
   transition: width 0.2s;
 }
 </style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Kurulum kaç gün sürer?", "acceptedAnswer": {"@type": "Answer", "text": "Uygun altyapıda 24–48 saat içinde tamamlanır."}}, {"@type": "Question", "name": "Taahhüt var mı?", "acceptedAnswer": {"@type": "Answer", "text": "Taahhütsüz seçenekler mevcut; taahhütlüde ilk 3 ay indirim sağlanır."}}, {"@type": "Question", "name": "Modem dahil mi?", "acceptedAnswer": {"@type": "Answer", "text": "Çoğu pakette modem dahildir; kurumsalda özel çözümler sunulur."}}]}</script>
-<link href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script><style>#map{height:520px;max-width:1100px;margin:16px auto;border-radius:14px;overflow:hidden;}</style><style>html{scroll-behavior:smooth;}</style></head>
+<link href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script><style>#map{height:520px;max-width:1100px;margin:16px auto;border-radius:14px;overflow:hidden;}</style><style>html{scroll-behavior:smooth;}</style><style id="responsiveStyles">
+html { scroll-behavior: smooth; }
+img { max-width: 100%; height: auto; }
+nav { position: relative; }
+.menu-toggle { display:none; font-size:26px; cursor:pointer; user-select:none; }
+nav ul { list-style:none; margin:0; padding:0; display:flex; gap:14px; align-items:center; }
+@media (max-width: 768px){
+  h1 { font-size: 32px !important; line-height: 1.2 !important; }
+  h2 { font-size: 24px !important; }
+  section { padding-left: 14px; padding-right: 14px; }
+  .container, .card, .section { width: 100% !important; max-width: 100% !important; padding-left: 12px; padding-right: 12px; }
+  .btn, button, a.button, .cta, .primary-btn { display:block; width: 100%; max-width: 360px; margin: 8px auto; }
+  img, svg { max_width:100%; height:auto; }
+  .menu-toggle{ display:block; color:inherit; }
+  nav ul {
+    display:none; position:absolute; left:0; right:0; top:58px; background:#042b3a; flex-direction:column; gap:0;
+    border-bottom-left-radius:12px; border-bottom-right-radius:12px; padding:10px 0;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+  }
+  nav ul.show { display:flex; }
+  nav ul li { padding:8px 18px; width:100%; text-align:center; }
+  nav ul li a { display:block; padding:10px 0; color:#e8feff; }
+}
+.fab-wrap {
+  position: fixed; right: 14px; bottom: 14px; z-index: 9999;
+  display:flex; flex-direction:column; gap:10px; align-items:flex-end;
+}
+.fab-btn {
+  background:#3ce0cf; color:#083b52; text-decoration:none; font-weight:800;
+  padding:12px 16px; border-radius:999px; box-shadow:0 8px 24px rgba(60,224,207,.35);
+}
+.fab-btn.alt { background:#22d1be; color:#083b52; }
+@media (max-width: 768px){
+  .fab-btn { padding:12px 14px; font-size:14px; }
+}
+</style><style id="backTopStyles">
+/* Back to top button */
+#backTop{
+  position: fixed; right: 14px; top: 58%;
+  bottom: auto; /* above FABs */
+  width: 42px; height: 42px; border-radius: 50%;
+  border:none; background:#0e4052; color:#e8feff;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  cursor:pointer; font-size:18px; line-height:42px; text-align:center;
+  opacity: 0.9; display:none; z-index: 9998;
+}
+#backTop:hover{ opacity: 1; }
+@media (max-width:768px){
+  #backTop{ top: 58%; bottom: auto; right: 12px; width: 38px; height: 38px; line-height: 38px; font-size:16px; }
+}
+</style></head>
 <body class="kurumsal-mode"><div id="scrollBar"></div>
 <!-- HEADER -->
 <header><div style="display:flex;align-items:center;gap:16px">
@@ -227,7 +317,7 @@ a.active{color:#00e1c6}
         <span id="modeKurumsal">Kurumsal</span>
 </div>
 </div>
-<nav>
+<nav><div class="menu-toggle">☰</div>
 <a href="#neden">Neden Biz</a>
 <a href="#cozumler">Çözümler</a>
 <a href="#paketler">Paketler</a>
@@ -364,7 +454,7 @@ document.querySelectorAll('.faq .q').forEach(q => {
 <span class="tag">Başlangıç</span><h3>Fiber 50</h3><div class="price">299₺/ay</div><p class="muted">50 Mbps • Limitsiz</p>
 <button class="btn" onclick="choose('Fiber 50')">Seç</button>
 </div>
-<div class="card center" data-aos="fade-up" style="outline:2px solid #00d9d9">
+<div class="card center" data-aos="fade-up">
 <span class="tag">Çok Tercih Edilen</span><h3>Fiber 100</h3><div class="price">349₺/ay</div><p class="muted">100 Mbps • Limitsiz</p>
 <button class="btn" onclick="choose('Fiber 100')">Seç</button>
 </div>
@@ -432,7 +522,6 @@ document.querySelectorAll('.faq .q').forEach(q => {
 </div>
 </section><section class="band" data-aos="fade-in" id="harita">
 </section><section class="band" id="ip" style="background:#001f3f;padding:70px 20px">
-
 </section>
 <section class="band" id="paket-quiz" style="background:#001f3f;padding:70px 20px">
 <div class="container center">
@@ -524,10 +613,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <!-- Sağ Orta Neon Menü (Test için her zaman görünür) -->
-<div id="neonMenu">
-<button class="neon-btn" onclick="openTeklif()">💬 Teklif Al</button>
-<button class="neon-btn" onclick="openMeeting()">📅 Görüşme Planla</button>
-</div>
 <!-- Teklif Al Modal -->
 <div class="modal" id="teklifModal">
 <div class="modal-content">
@@ -784,7 +869,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 })();
 </script>
-<button aria-label="Yukarı dön" id="backTop" style="position:fixed;right:22px;bottom:96px;display:none;border:none;border-radius:50%;width:46px;height:46px;background:#00e1c6;box-shadow:0 6px 24px rgba(0,0,0,.25);font-size:22px;cursor:pointer;z-index:999">↑</button>
+<button aria-label="Yukarı dön" id="backTop">↑</button>
 <script>
 // Back to top + active nav highlight + FAQ deep link + micro analytics + altyapi legend + form toast
 (function(){
@@ -982,5 +1067,44 @@ function copyIP(){
   const t = document.getElementById("ip").textContent || "";
   navigator.clipboard.writeText(t).then(()=>alert("IP kopyalandı: " + t));
 }
-</script></body>
+</script><script id="responsiveJS">
+(function(){
+  function ready(fn){ if(document.readyState!=='loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
+  ready(function(){
+    var toggle = document.querySelector('.menu-toggle');
+    var menu = document.getElementById('menu');
+    if (toggle && menu){
+      toggle.addEventListener('click', function(){ menu.classList.toggle('show'); });
+    }
+  });
+})();
+</script><script>(function(){
+  function ready(fn){ if(document.readyState!=='loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
+  ready(function(){
+    if (typeof window.openTeklif !== 'function'){
+      window.openTeklif = function(){
+        var el = document.querySelector('#teklif, #contact, [data-modal="teklif"]');
+        if (el && el.scrollIntoView){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+        else alert('Teklif formu yakında!');
+      };
+    }
+    if (typeof window.openMeeting !== 'function'){
+      window.openMeeting = function(){
+        var el = document.querySelector('#gorusme, #meeting, [data-modal="gorusme"]');
+        if (el && el.scrollIntoView){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+        else alert('Görüşme planlama yakında!');
+      };
+    }
+  });
+})();</script><script id="backTopJS">(function(){
+  var btn = document.getElementById('backTop');
+  if (!btn) return;
+  window.addEventListener('scroll', function(){
+    if (window.scrollY > 300){ btn.style.display='block'; }
+    else { btn.style.display='none'; }
+  });
+  btn.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();</script><div class="cta-stack" id="cta-stack"><a class="cta-btn" href="#teklif" onclick="openTeklif &amp;&amp; openTeklif(); return false;">Teklif Al</a><a class="cta-btn" href="#gorusme" onclick="openMeeting &amp;&amp; openMeeting(); return false;">Görüşme Planla</a></div></body>
 </html>
